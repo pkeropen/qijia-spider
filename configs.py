@@ -1,11 +1,19 @@
 #!/usr/bin/python
-#coding:utf-8
+# coding:utf-8
 
 
 import os
+import platform
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-DRIVER_BIN = os.path.join(PROJECT_ROOT, "bin/win/chromedriver.exe")
+
+sysstr = platform.system()
+
+if (sysstr == "Windows"):
+    DRIVER_BIN = os.path.join(PROJECT_ROOT, "bin/win/chromedriver.exe")
+else:
+    DRIVER_BIN = os.path.join(PROJECT_ROOT, "bin/mac64/chromedriver")
+
 
 # 浏览器路径
 CHROME_DRIVER_PATH = DRIVER_BIN  # 可以指定绝对路径，如果不指定的话会在$PATH里面查找
