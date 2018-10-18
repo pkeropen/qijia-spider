@@ -14,7 +14,7 @@ class ChromeDownloaderMiddleware(object):
         ua = UserAgent()
 
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')  # 设置无界面
+        # options.add_argument('--headless')  # 设置无界面
         options.add_argument('User-Agent' + ua.random)
 
         if CHROME_DRIVER_PATH:
@@ -23,7 +23,7 @@ class ChromeDownloaderMiddleware(object):
             self.driver = webdriver.Chrome(chrome_options=options)  # 初始化Chrome驱动
 
     def __del__(self):
-        self.driver.close()
+        self.driver.quit()
 
     def process_request(self, request, spider):
         try:
