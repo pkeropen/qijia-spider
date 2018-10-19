@@ -1,7 +1,7 @@
 from sqlalchemy import Column
 from sqlalchemy.dialects.mysql import TEXT, INTEGER
 
-from worm.Connections import Base
+from common.connections import Base
 
 
 class MerchantDO(Base):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from worm.Connections import db_session
+from common.connections import db_session
 from worm.Items import MerchantItem
 from worm.model.Models import MerchantDO
 
@@ -49,7 +49,7 @@ class MerchantStrategyService(object):
                 print('spider_success')
             except Exception as error:
                 session.rollback()
-                print('gp error = ', error)
+                print('error = ', error)
                 print('spider_failure_exception')
                 raise
             finally:

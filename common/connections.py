@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding:utf-8
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
@@ -6,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
 
 # sqlalchemy model 基类
-from configs import DATABASES
+from common.configs import DATABASES
 
 Base = declarative_base()
 

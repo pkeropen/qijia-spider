@@ -4,7 +4,7 @@
 from scrapy.http import HtmlResponse
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
-from configs import *
+from common.configs import *
 from fake_useragent import UserAgent
 
 
