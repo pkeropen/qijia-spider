@@ -5,12 +5,12 @@ import platform
 import redis
 from msic.core.service import mongodb_service
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 if platform.system() == "Windows":
-    DRIVER_BIN = os.path.join(PROJECT_ROOT, "../bin/win/chromedriver.exe")
+    DRIVER_BIN = os.path.join(PROJECT_ROOT, "bin/win/chromedriver.exe")
 else:
-    DRIVER_BIN = os.path.join(PROJECT_ROOT, "../bin/mac64/chromedriver")
+    DRIVER_BIN = os.path.join(PROJECT_ROOT, "bin/mac64/chromedriver")
 
 # 浏览器路径
 CHROME_DRIVER_PATH = DRIVER_BIN  # 可以指定绝对路径，如果不指定的话会在$PATH里面查找
@@ -20,12 +20,12 @@ USE_PROXY = True
 #################################
 
 # mongodb
-MONGODB_HOST = "127.0.0.1"
-MONGODB_PORT = 27017
+# MONGODB_HOST = "127.0.0.1"
+# MONGODB_PORT = 27017
 
-DATABASE_NAME = 'common'
-mongodb_client = mongodb_service.get_client(MONGODB_HOST, MONGODB_PORT)
-mongodb = mongodb_service.get_db(mongodb_client, DATABASE_NAME)
+# DATABASE_NAME = 'common'
+# mongodb_client = mongodb_service.get_client(MONGODB_HOST, MONGODB_PORT)
+# mongodb = mongodb_service.get_db(mongodb_client, DATABASE_NAME)
 
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379

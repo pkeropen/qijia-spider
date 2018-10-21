@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 
 from msic.common import log, agents
-from msic.proxy.proxy_pool import proxy_pool
+from msic.proxy.proxy_pool_ms import proxy_pool
 
 JAVASCRIPT = 'JAVASCRIPT'
 
@@ -29,6 +29,7 @@ class CatchExceptionMiddleware(object):
 class CustomHttpProxyMiddleware(object):
     def process_request(self, request, spider):
         try:
+            log.info("==== proxy = " + proxy_pool.random_choice_proxy() + "  ====")
             request.meta['proxy'] = "http://%s" % proxy_pool.random_choice_proxy()
         except Exception as e:
             log.error(e)

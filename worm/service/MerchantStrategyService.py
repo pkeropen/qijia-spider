@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from common.connections import db_session
+from msic.common import log
 from worm.Items import MerchantItem
-from worm.model.Models import MerchantDO
+from model.Models import MerchantDO
 
 
 class MerchantStrategyService(object):
@@ -10,7 +11,7 @@ class MerchantStrategyService(object):
         self.session = db_session()
 
     def handle_item(self, item: MerchantItem):
-        print('********  process item from worm url = ', item['url'])
+        log.info('process item from worm url = ' + item['url'])
 
         if isinstance(item, MerchantItem):
 
@@ -30,28 +31,28 @@ class MerchantStrategyService(object):
                 m = session.query(MerchantDO).filter(MerchantDO.url == model.url).first()
 
                 if m is None:  # 插入数据
-                    print('add model from worm url ', model.url)
+                    log.info('add model from worm url = ' + model.url)
                     session.add(model)
                     session.flush()
+                    session.commit()
+                    log.info('spider_success url = ' + model.url)
 
-                else:  # 更新数据
-                    print("update model from gp url ", model.url)
-                    m.updated_at = item['updated_at']
-                    m.merchant_name = item['merchant_name']
-                    m.merchant_pic = item['merchant_pic']
-                    m.service_area = item['service_area']
-                    m.merchant_id = item['merchant_id']
-                    m.company_profile = item['company_profile']
-                    m.area = item['area']
-                    m.url = item['url']
+                # else:  # 更新数据
+                #    log.info("update model from gp url " + model.url)
+                #    m.updated_at = item['updated_at']
+                #    m.merchant_name = item['merchant_name']
+                #    m.merchant_pic = item['merchant_pic']
+                #    m.service_area = item['service_area']
+                #    m.merchant_id = item['merchant_id']
+                #    m.company_profile = item['company_profile']
+            #     m.area = item['area']
+            #    m.url = item['url']
 
-                session.commit()
-                print('spider_success')
             except Exception as error:
                 session.rollback()
-                print('error = ', error)
-                print('spider_failure_exception')
+                log.error(error)
                 raise
             finally:
                 session.close()
         return item
+

@@ -23,4 +23,8 @@ class MerchantListItem(scrapy.Item):
     merchant_id = scrapy.Field()
 
 
-
+# 城市
+class CityItem(scrapy.Item):
+    url = scrapy.Field()  # 链接
+    name = scrapy.Field()  # 名称
+    create_at = scrapy.Field()

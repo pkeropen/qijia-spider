@@ -7,6 +7,8 @@ from selenium.common.exceptions import TimeoutException
 from common.configs import *
 from fake_useragent import UserAgent
 
+from msic.common import log
+
 
 class ChromeDownloaderMiddleware(object):
 
@@ -27,11 +29,11 @@ class ChromeDownloaderMiddleware(object):
 
     def process_request(self, request, spider):
         try:
-            print('Chrome driver begin...')
+            log.info('Chrome driver begin...')
             self.driver.get(request.url)  # 获取网页链接内容
             return HtmlResponse(url=request.url, body=self.driver.page_source, request=request, encoding='utf-8',
                                 status=200)  # 返回HTML数据
         except TimeoutException:
             return HtmlResponse(url=request.url, request=request, encoding='utf-8', status=500)
         finally:
-            print('Chrome driver end...')
+            log.info('Chrome driver end...')

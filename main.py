@@ -16,6 +16,8 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from scrapy import signals, cmdline
 from pydispatch import dispatcher
+
+from worm.spiders.QijiaCitySpider import QijiaCitySpider
 from worm.spiders.QijiaSpider import QijiaSpider
 from msic.proxy.proxy_pool_ms import proxy_pool
 
@@ -41,6 +43,7 @@ class Runner(object):
 
     def crawl(self):
         self.is_running = True
+        self.process.crawl(QijiaCitySpider())
         self.process.crawl(QijiaSpider())
 
     def start_proxy_pool(self):
@@ -54,6 +57,8 @@ class Runner(object):
         self.start_scrapy()
 
 
+
+
 if __name__ == '__main__':
     runner = Runner()
 
@@ -65,7 +70,7 @@ if __name__ == '__main__':
                 runner.crawl()
 
         schedule = Scheduler()
-        schedule.every(30).minutes.do(task)
+        schedule.every(5).minutes.do(task)
 
         while True:
             schedule.run_pending()

@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from common.connections import db_session
 from msic.common import utils
-from msic.model.Models import ProxyDO
+from model.Models import ProxyDO
 # sqlalchemy model 基类
 from msic.proxy.proxy import Proxy
 

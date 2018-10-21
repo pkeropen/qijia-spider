@@ -5,7 +5,6 @@ import threading
 import time
 from datetime import datetime
 
-import pymongo
 from schedule import Scheduler
 
 from common import configs
@@ -14,7 +13,7 @@ from msic.core.service.mysqldb_service import MysqlDbService
 from msic.proxy import proxy_strategy
 
 TASK_INTERVAL = 60
-FAILED_COUNT_BORDER = 3
+FAILED_COUNT_BORDER = 0
 MIN_PROXY_COUNT = 10
 
 REDIS_KEY_LAST_CHECK_IP_TIME = "last_check_ip_time"
@@ -125,7 +124,7 @@ class ProxyPoolMS(object):
         thread.start()
 
     def drop_proxy(self):
-        self.collection.detele_all()
+        self.db.detele_all()
 
 
 proxy_pool = ProxyPoolMS()
