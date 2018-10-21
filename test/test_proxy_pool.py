@@ -1,11 +1,11 @@
 import unittest
 
-from msic.proxy.proxy_pool import ProxyPool
+from msic.proxy.proxy_pool_ms import ProxyPoolMS
 
 
 class TestProxyPool(unittest.TestCase):
     def setUp(self):
-        self.proxy_pool = ProxyPool()
+        self.proxy_pool = ProxyPoolMS()
 
     def test_random_choice_proxy(self):
         ip = self.proxy_pool.random_choice_proxy()
