@@ -16,7 +16,7 @@ class ChromeDownloaderMiddleware(object):
         ua = UserAgent()
 
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')  # 设置无界面
+        options.add_argument('--headless')  # 设置无界面
         options.add_argument('User-Agent' + ua.random)
 
         if CHROME_DRIVER_PATH:

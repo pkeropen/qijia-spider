@@ -3,7 +3,6 @@
 import os
 import platform
 import redis
-from msic.core.service import mongodb_service
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 

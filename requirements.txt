@@ -1,0 +1,13 @@
+BeautifulSoup4
+scrapy
+scrapy_redis
+redis
+sqlalchemy
+sqlalchemy_utils
+pymysql
+schedule
+selenium
+fake_useragent
+twisted
+pydispatch
+requests

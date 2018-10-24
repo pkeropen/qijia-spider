@@ -1,26 +1,23 @@
-import os
-import sys
 import threading
 import time
-from os.path import dirname
 
+from common.ip_utils import get_host_ip
+print(get_host_ip())
+
+from pydispatch import dispatcher
 from schedule import Scheduler
+from scrapy import signals
+from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
 from twisted.internet import reactor
 
 from common import configs
 
 # path = dirname(os.path.abspath(os.path.dirname(__file__)))
 # sys.path.append(path)
-
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
-from scrapy import signals, cmdline
-from pydispatch import dispatcher
-
 from worm.spiders.QijiaCitySpider import QijiaCitySpider
 from worm.spiders.QijiaSpider import QijiaSpider
 from msic.proxy.proxy_pool_ms import proxy_pool
-
 
 # cmdline.execute(r"scrapy crawl worm -a urls=https://www.jia.com/zx/guangzhou/company/gexingbao/?order=koubei&page=2".split())
 
@@ -57,10 +54,9 @@ class Runner(object):
         self.start_scrapy()
 
 
-
-
 if __name__ == '__main__':
     runner = Runner()
+    print("exec main")
 
 
     def thread_task():

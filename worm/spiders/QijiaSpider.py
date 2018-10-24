@@ -1,18 +1,16 @@
 #!/usr/bin/python
 # coding:utf-8
 
-import time
 import ssl
+import time
+
 import scrapy
 from scrapy import Request
-from scrapy.spiders import Rule, CrawlSpider
-
+from scrapy.spiders import CrawlSpider
 from common import configs
 from msic.common import log
-from worm.Items import MerchantItem, MerchantListItem
 from msic.proxy.proxy_pool_ms import proxy_pool
-from scrapy.linkextractors import LinkExtractor
-
+from worm.Items import MerchantItem, MerchantListItem
 from worm.service.CityStrategyService import CityStrategyService
 
 

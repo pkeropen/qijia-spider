@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from sqlalchemy.ext.declarative import declarative_base
-
 from common.connections import db_session
 from msic.common import utils
 from model.Models import ProxyDO

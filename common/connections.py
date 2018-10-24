@@ -8,12 +8,14 @@ from sqlalchemy_utils import database_exists, create_database
 
 # sqlalchemy model 基类
 from common.configs import DATABASES
+from msic.common import utils, log
 
 Base = declarative_base()
 
 
 # 数据库连接引擎，用来连接数据库
 def db_connect_engine():
+    utils.log('db_connect_engine')
     engine = create_engine("%s://%s:%s@%s:%s/%s?charset=utf8mb4"
                            % (DATABASES['DRIVER'],
                               DATABASES['USER'],
@@ -22,11 +24,12 @@ def db_connect_engine():
                               DATABASES['PORT'],
                               DATABASES['NAME']),
                            echo=False)
-
-    if not database_exists(engine.url):
-        create_database(engine.url)  # 创建库
-        Base.metadata.create_all(engine)  # 创建表
-
+    try:
+        if not database_exists(engine.url):
+            create_database(engine.url)  # 创建库
+            Base.metadata.create_all(engine)  # 创建表
+    except Exception as e:
+        log.error(e)
     return engine
 
 

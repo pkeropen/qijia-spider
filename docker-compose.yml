@@ -1,0 +1,41 @@
+version: '2.2'
+services:
+  spider:
+    build: .
+    volumes:
+    - .:/spider
+    #ports:
+    #- "80:80"
+    #- "3306:3306"
+    expose:
+    - "80"
+    - "3306"
+    - "6379"
+    links:
+    - redis
+    #- mysql
+    # 依赖关系 先跑redis mysql
+    depends_on:
+    - redis
+    networks:
+     - app_net
+    container_name: "compose-spider"
+
+  redis:
+    image: redis
+    # 端口映射
+    ports:
+    - "6379:6379"
+    # 容器名称
+    container_name: "compose-redis"
+    networks:
+    - app_net
+
+networks:
+  # 配置docker network
+  app_net:
+    driver: bridge
+    ipam:
+      config:
+      # 子网络
+      - subnet: 10.10.0.0/16

@@ -63,6 +63,7 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'msic.scrapy.middlewares.CustomUserAgentMiddleware': 2,
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 80,
     'worm.middlewares.ChromeDownloaderMiddleware': 998,
 }
 if USE_PROXY:
@@ -79,6 +80,7 @@ if USE_PROXY:
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'worm.pipelines.MerchantSpiderPipeline': 302,
+    'scrapy_redis.pipelines.RedisPipeline': 304,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -101,5 +103,17 @@ ITEM_PIPELINES = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# REDIRECT_ENABLED = False
+RANDOMIZE_DOWNLOAD_DELAY = True
+# Enables scheduling storing requests queue in redis.
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# Ensure all spiders share same duplicates filter through redis.
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+# REDIS_START_URLS_AS_SET = True
+
+REDIS_PARAMS = {'host': 'redis', 'decode_responses': False}
+
 LOG_ENABLED = True
 LOG_FORMAT = '%(asctime)s,%(msecs)d  [%(name)s] %(levelname)s: %(message)s'

@@ -6,12 +6,10 @@ import time
 from datetime import datetime
 
 from schedule import Scheduler
-
 from common import configs
 from msic.common import utils
 from msic.core.service.mysqldb_service import MysqlDbService
 from msic.proxy import proxy_strategy
-
 TASK_INTERVAL = 60
 FAILED_COUNT_BORDER = 0
 MIN_PROXY_COUNT = 10

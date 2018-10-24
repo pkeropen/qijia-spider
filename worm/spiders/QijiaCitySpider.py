@@ -1,17 +1,13 @@
 #!/usr/bin/python
 # coding:utf-8
 
-import time
 import ssl
-import scrapy
-from scrapy import Request
-from scrapy.spiders import Rule, CrawlSpider
+import time
 
-from common import configs
+from scrapy.spiders import CrawlSpider
+
 from msic.common import log
-from worm.Items import MerchantItem, MerchantListItem, CityItem
-from msic.proxy.proxy_pool_ms import proxy_pool
-from scrapy.linkextractors import LinkExtractor
+from worm.Items import CityItem
 
 
 class QijiaCitySpider(CrawlSpider):
